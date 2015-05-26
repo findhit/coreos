@@ -2,7 +2,6 @@ var chai = require( 'chai' );
 var expect = chai.expect;
 var CoreOsAzure = require( '../../' );
 
-describe( "Subscription", function (){
 describe( "subscription", function () {
 describe( "add", function () {
 
@@ -41,6 +40,5 @@ describe( "add", function () {
 		}).to.throw( TypeError );
 	});
 
-});
 });
 });

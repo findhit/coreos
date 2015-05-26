@@ -2,7 +2,7 @@ var chai = require( 'chai' );
 var expect = chai.expect;
 var CoreOsAzure = require( '../' );
 
-describe( "coreos-azure", function () {
+describe( "CoreOsAzure", function () {
 
     it( "should export a constructor", function () {
         expect( typeof CoreOsAzure ).to.be.equal( 'function' );

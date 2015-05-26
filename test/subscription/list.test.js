@@ -2,7 +2,6 @@ var chai = require( 'chai' );
 var expect = chai.expect;
 var CoreOsAzure = require( '../../' );
 
-describe( "Subscription", function (){
 describe( "subscription", function () {
 describe( "list", function () {
 
@@ -17,6 +16,5 @@ describe( "list", function () {
         ).to.be.equal( subscriptions );
     });
 
-});
 });
 });
