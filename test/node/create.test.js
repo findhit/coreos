@@ -6,8 +6,12 @@ describe( "coreos-azure", function () {
 describe( "node", function () {
 describe( "create", function () {
 
-    it( "should create flawlessly a vm", function () {
-        
+	beforeEach(function () {
+		this.cos = new CoreOsAzure();
+	});
+
+    it.only( "should create flawlessly a vm", function () {
+        return this.cos.nodeCreate();
     });
 
 });

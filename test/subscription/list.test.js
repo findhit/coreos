@@ -1,11 +1,22 @@
-var expect = require( 'expect' ),
-	CoreOsAzure = require( '../../index' );
+var chai = require( 'chai' );
+var expect = chai.expect;
+var CoreOsAzure = require( '../../' );
 
-describe( 'Subscription', function(){
-	it('List all subscriptions ', function( done ){
+describe( "Subscription", function (){
+describe( "subscription", function () {
+describe( "list", function () {
 
-		expect( CoreOsAzure.subscriptionList() ).be.ok();
-
-		done();
+	beforeEach(function () {
+		this.cos = new CoreOsAzure();
 	});
+
+	it( "should get subscriptions from config", function () {
+		var subscriptions = this.cos.configGet( 'subscriptions', {} );
+        expect(
+            this.cos.subscriptionList()
+        ).to.be.equal( subscriptions );
+    });
+
+});
+});
 });
