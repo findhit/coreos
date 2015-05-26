@@ -72,6 +72,15 @@ var CoreOsAzure = Class.extend({
         fs.writeFileSync( this.options.configPath, JSON.stringify( this.config ) );
     },
 
+    // Uuid validation
+    validUuid: function( uuid ){
+        if( !uuid || typeof uuid != 'string' ){
+            return false;
+        }
+
+        return new RegExp( '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}' ).test( uuid );
+    },
+
 });
 
 // Extend with libs
