@@ -58,6 +58,16 @@ var CoreOsAzure = Class.extend({
         }
     },
 
+    configGet: function ( key, default_value ) {
+        if ( this.config[ key ] ) {
+            return this.config[ key ];
+        }
+
+        this.config[ key ] = default_value;
+
+        return this.config[ key ];
+    },
+
     configSave: function () {
         fs.writeFileSync( this.options.configPath, JSON.stringify( this.config ) );
     },
