@@ -4,7 +4,7 @@
   "description": "coreos cli for creating and managing clusters on azure",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/.bin/jshint . && node_modules/.bin/mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 10000 --reporter spec $(find test/* -name '*.test.js')"
   },
   "repository": {
     "type": "git",
@@ -27,5 +27,10 @@
   "bugs": {
     "url": "https://github.com/findhit/coreos-azure/issues"
   },
-  "homepage": "https://github.com/findhit/coreos-azure"
+  "homepage": "https://github.com/findhit/coreos-azure",
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "jshint": "^2.7.0",
+    "mocha": "^2.2.5"
+  }
 }
