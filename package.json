@@ -4,7 +4,7 @@
   "description": "coreos cli for creating and managing clusters on azure",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/jshint . && node_modules/.bin/mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 10000 --reporter spec $(find test/* -name '*.test.js')"
+    "test": "node_modules/.bin/mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 10000 --reporter spec $(find test/* -name '*.test.js')"
   },
   "repository": {
     "type": "git",
@@ -34,6 +34,7 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
+    "azure-asm-compute": "^0.10.0",
     "debug": "^2.2.0",
     "findhit-class": "^0.1.1",
     "findhit-util": "^0.2.7",
