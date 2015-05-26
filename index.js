@@ -30,8 +30,7 @@ var CoreOsAzure = Class.extend({
          */
         subscription: undefined,
 
-
-        discovery: 'new', // by default it should gather always one new
+        discovery: undefined, // by default it should generate
 
     },
 
