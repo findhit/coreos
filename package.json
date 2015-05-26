@@ -1,0 +1,31 @@
+{
+  "name": "coreos-azure",
+  "version": "1.0.0",
+  "description": "coreos cli for creating and managing clusters on azure",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/findhit/coreos-azure.git"
+  },
+  "keywords": [
+    "coreos",
+    "core",
+    "os",
+    "linux",
+    "microsoft",
+    "azure",
+    "cli",
+    "management",
+    "manage",
+    "cluster"
+  ],
+  "author": "Jose Moreira <jose.moreira@findhit.com>",
+  "license": "GPL v3",
+  "bugs": {
+    "url": "https://github.com/findhit/coreos-azure/issues"
+  },
+  "homepage": "https://github.com/findhit/coreos-azure"
+}
