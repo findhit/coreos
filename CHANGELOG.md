@@ -1,3 +1,4 @@
 ## Upcoming
 
-## 1.0.0
+## 0.0.1
+npm name allocation
