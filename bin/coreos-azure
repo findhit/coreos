@@ -1,3 +1,0 @@
-#!/usr/bin/env node
-
-var CoreOsAzure = require( '../lib' );

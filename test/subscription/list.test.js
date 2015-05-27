@@ -1,19 +1,19 @@
 var chai = require( 'chai' );
 var expect = chai.expect;
-var CoreOsAzure = require( '../../' );
+var CoreOsManager = require( '../../' );
 
-describe( "subscription", function () {
+describe( "account", function () {
 describe( "list", function () {
 
 	beforeEach(function () {
-		this.cos = new CoreOsAzure();
+		this.cos = new CoreOsManager();
 	});
 
-	it( "should get subscriptions from config", function () {
-		var subscriptions = this.cos.configGet( 'subscriptions', {} );
+	it( "should get accounts from config", function () {
+		var accounts = this.cos.configGet( 'accounts', {} );
         expect(
-            this.cos.subscriptionList()
-        ).to.be.equal( subscriptions );
+            this.cos.accountList()
+        ).to.be.equal( accounts );
     });
 
 });

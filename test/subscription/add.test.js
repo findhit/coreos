@@ -1,25 +1,25 @@
 var chai = require( 'chai' );
 var expect = chai.expect;
-var CoreOsAzure = require( '../../' );
+var CoreOsManager = require( '../../' );
 
-describe( "subscription", function () {
+describe( "account", function () {
 describe( "add", function () {
 
 	beforeEach(function () {
-		this.cos = new CoreOsAzure();
+		this.cos = new CoreOsManager();
 	});
 
-	it( "should add subscription to subscriptions", function (){
+	it( "should add account to accounts", function (){
 
-		var subscriptions = this.cos.configGet( 'subscriptions', {} );
-		var subscription = {
+		var accounts = this.cos.configGet( 'accounts', {} );
+		var account = {
 			id: '4d36e96e-e325-11ce-bfc1-08002be10318',
 			pem: 'somekindof',
 		};
 
-		this.cos.subscriptionAdd( subscription );
+		this.cos.accountAdd( account );
 
-		expect( subscriptions[ subscription.id ] ).to.be.equal( subscription );
+		expect( accounts[ account.id ] ).to.be.equal( account );
 	});
 
 	it( "should throw an error if we try to add a string", function () {
@@ -30,7 +30,7 @@ describe( "add", function () {
 		}).to.throw( TypeError );
 	});
 
-	it( "should throw an error if subscription id isn't a valid uuid", function () {
+	it( "should throw an error if account id isn't a valid uuid", function () {
 		var self = this;
 
 		expect(function () {

@@ -1,42 +1,42 @@
 var chai = require( 'chai' );
 var expect = chai.expect;
-var CoreOsAzure = require( '../../' );
+var CoreOsManager = require( '../../' );
 
-describe( "subscription", function () {
+describe( "account", function () {
 describe( "get", function () {
 
 	beforeEach(function () {
-		this.cos = new CoreOsAzure();
+		this.cos = new CoreOsManager();
 	});
 
-	it( "should get a subscription from config", function (){
+	it( "should get a account from config", function (){
 
-		var subscriptions = this.cos.configGet( 'subscriptions', {} );
-		var subscription = {
+		var accounts = this.cos.configGet( 'accounts', {} );
+		var account = {
 			id: '4d36e96e-e325-11ce-bfc1-08002be10318',
 			pem: 'somekindof',
 		};
 
         // Add manually
-        subscriptions[ subscription.id ] = subscription;
+        accounts[ account.id ] = account;
 
 		expect(
-            this.cos.subscriptionGet(
+            this.cos.accountGet(
                 '4d36e96e-e325-11ce-bfc1-08002be10318'
             )
-        ).to.be.equal( subscription );
+        ).to.be.equal( account );
 
 	});
 
     it( "should throw an error if no id was provided", function () {
         expect(function () {
-            return this.cos.subscriptionGet();
+            return this.cos.accountGet();
         }).to.throw( TypeError );
     });
 
     it( "should throw an error if id isnt a valid uuid", function () {
         expect(function () {
-            return this.cos.subscriptionGet(
+            return this.cos.accountGet(
                 '4d36e96'
             );
         }).to.throw( TypeError );
@@ -44,7 +44,7 @@ describe( "get", function () {
 
     it( "should throw an error if there is none", function () {
         expect(function () {
-            return this.cos.subscriptionGet(
+            return this.cos.accountGet(
                 '4d36e96e-e325-11ce-bfc1-08002be10318'
             );
         }).to.throw( Error );

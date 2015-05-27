@@ -1,43 +1,43 @@
 var chai = require( 'chai' );
 var expect = chai.expect;
-var CoreOsAzure = require( '../../' );
+var CoreOsManager = require( '../../' );
 
-describe( "subscription", function () {
+describe( "account", function () {
 describe( "current", function () {
 
 	beforeEach(function () {
-		var cos = this.cos = new CoreOsAzure();
-        var subscription = this.subscription = {
+		var cos = this.cos = new CoreOsManager();
+        var account = this.account = {
 			id: '4d36e96e-e325-11ce-bfc1-08002be10318',
 			pem: 'somekindof',
 		};
 
-		cos.subscriptionAdd( subscription );
+		cos.accountAdd( account );
 	});
 
-	it( "should allow us to set current from .subscriptionCurrent", function (){
+	it( "should allow us to set current from .accountCurrent", function (){
 
-        this.cos.subscriptionCurrent( this.subscription.id );
+        this.cos.accountCurrent( this.account.id );
 
         expect(
-            this.cos.subscriptionCurrent()
-        ).to.be.equal( this.subscription );
+            this.cos.accountCurrent()
+        ).to.be.equal( this.account );
     });
 
     it("should allow us to set current from options", function (){
-        this.cos.options.currentSubscription = this.subscription.id;
+        this.cos.options.currentaccount = this.account.id;
 
         expect(
-            this.cos.subscriptionCurrent()
-        ).to.be.equal( this.subscription );
+            this.cos.accountCurrent()
+        ).to.be.equal( this.account );
     });
 
     it("should allow us to set current from config", function (){
-        this.cos.config.currentSubscription = this.subscription.id;
+        this.cos.config.currentaccount = this.account.id;
 
         expect(
-            this.cos.subscriptionCurrent()
-        ).to.be.equal( this.subscription );
+            this.cos.accountCurrent()
+        ).to.be.equal( this.account );
     });
 
 });
