@@ -1,15 +1,15 @@
 var chai = require( 'chai' );
 var expect = chai.expect;
-var CoreOsManager = require( '../' );
+var CoreOS = require( '../' );
 
-describe( "CoreOsManager", function () {
+describe( "CoreOS", function () {
 
     it( "should export a constructor", function () {
-        expect( typeof CoreOsManager ).to.be.equal( 'function' );
+        expect( typeof CoreOS ).to.be.equal( 'function' );
     });
 
-    it( "should allow creation of CoreOsManager instance without options", function () {
-        return new CoreOsManager();
+    it( "should allow creation of CoreOS instance without options", function () {
+        return new CoreOS();
     });
 
 });

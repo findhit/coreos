@@ -1,12 +1,12 @@
 var chai = require( 'chai' );
 var expect = chai.expect;
-var CoreOsManager = require( '../../' );
+var CoreOS = require( '../../' );
 
 describe( "account", function () {
 describe( "current", function () {
 
 	beforeEach(function () {
-		var cos = this.cos = new CoreOsManager();
+		var cos = this.cos = new CoreOS();
         var account = this.account = {
 			id: '4d36e96e-e325-11ce-bfc1-08002be10318',
 			pem: 'somekindof',

@@ -1,12 +1,12 @@
 var chai = require( 'chai' );
 var expect = chai.expect;
-var CoreOsManager = require( '../../' );
+var CoreOS = require( '../../' );
 
 describe( "account", function () {
 describe( "list", function () {
 
 	beforeEach(function () {
-		this.cos = new CoreOsManager();
+		this.cos = new CoreOS();
 	});
 
 	it( "should get accounts from config", function () {
