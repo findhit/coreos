@@ -1,6 +1,6 @@
 # coreos
 
-the missing coreos cli for creating and managing clusters on different providers
+the missing CoreOS cli for creating and managing clusters on different providers
 
 ##### Warning:
 
