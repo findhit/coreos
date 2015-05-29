@@ -1,56 +1,98 @@
 #!/usr/bin/env node
 
-var CoreOS = require( '../lib' );
-var Yargs = require( 'yargs' );
-var package = require( '../package' );
 var Stack = require( 'stack-queue' );
+var Util = require( 'findhit-util' );
+var CoreOS = require( '../lib' );
+var yargs = require( 'yargs' );
+var package = require( '../package' );
 
 var stack = new Stack();
 
-var args = Yargs
+// Global options
+var goptions = {
+    'configIgnore': {
+        alias: 'i',
+        default: false,
+        describe: 'ignore coreos json config file',
+        type: 'boolean',
+    },
+    'configPath': {
+        alias: 'c',
+        default: process.cwd() + '/.coreos.json',
+        describe: 'path to coreos json config file, if not provided, will default to your "/current/working/dir/.coreos.json"',
+        type: 'string',
+    },
+};
+
+var args = yargs
     .version( package.version )
     .usage( 'coreos <commands> [options]' )
-    .help( 'h' ).alias( 'h', 'help' )
-    .demand(1, 'must provide a valid command')
-
-  // Global options
-    .options({
-        'configIgnore': {
-            alias: 'i',
-            default: false,
-            describe: 'ignore coreos json config file',
-            type: 'boolean',
-        },
-        'configPath': {
-            alias: 'c',
-            default: process.cwd() + '/.coreos.json',
-            describe: 'path to coreos json config file, if not provided, will default to your "/current/working/dir/.coreos.json"',
-            type: 'string',
-        },
-        'discovery': {
-            alias: 'd',
-            describe: 'As cloud-config is auto-generated you could specify which discovery endpoint it should be working',
-            type: 'string',
-        }
-    })
+    .options( goptions )
 
   // Commands
     .command( 'account', 'manage multiple providers accounts', function ( yargs ) {
-        console.log( 2 );
+        var args = yargs
+            .options( goptions )
+
+            .command( 'add', 'add an account', function ( yargs ) {
+                console.log( 'test ');
+            })
+
+            .demand( 2, 'Please provide a account command' )
+            .help( 'h' ).alias( 'h', 'help' )
+            .argv;
     })
     .command( 'node', 'manage cluster nodes', function ( yargs ) {
+        var args = yargs
+            .options( goptions )
 
+            .command( 'add', 'add an account', function ( yargs ) {
+                var args = yargs
+                    .options({
+                        'discovery': {
+                            alias: 'd',
+                            describe: 'As cloud-config is auto-generated you could specify which discovery endpoint it should be working',
+                            type: 'string',
+                        }
+                    })
+                    .argv;
+                console.log( 'test ');
+            })
+
+            .command( 'exec',
+                [
+                    "Executes a command on a node.",
+                    "All files that are found will be uploaded into remote node",
+                ].join(' '),
+                function ( yargs ) {
+                    
+                }
+            )
+
+            .demand( 2, 'Please provide a account command' )
+            .help( 'h' ).alias( 'h', 'help' )
+            .argv;
     })
+
+    /*
+    // TODO
     .command( 'deploy', 'deploy and manage services', function ( yargs ) {
+        var args = yargs
+            .help( 'h' ).alias( 'h', 'help' )
+            .options( goptions )
 
+            .demand( 2, 'Please provide a account command' )
+            .argv;
     })
+    */
 
+    .demand( 1, 'Please provide a command' )
+    .help( 'h' ).alias( 'h', 'help' )
     .argv;
 
 var cos = new CoreOS({
     configPath: ! args.configIgnore && args.configPath || false,
     loadConfigOnInit: ! args.configIgnore,
-    discovery: args.discovery,
 });
 
 // Handle async things trough stack
