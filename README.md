@@ -2,15 +2,96 @@
 
 the missing coreos cli for creating and managing clusters
 
-
-##### This repo isn't working yet!!!!
-But I'm an Usain Bolt programmer, so it should be running up on a couple of days.
-
-
 ##### Warning:
 
 Currently we only support Microsoft Azure Cloud. Feel free to PR your own
-account handler.
+account provider class.
+
+
+## Installation
+
+```bash
+npm install -g coreos
+```
+
+## Usage
+
+### Node.js / io.js
+
+Please check [API](API.md) for further methods details.
+
+##### Examples:
+
+```javascript
+var CoreOS = require( 'coreos' );
+var cos = new CoreOS({
+        // Don't read configuration file
+        loadConfigOnInit: false,
+    });
+
+// Add an Azure Account
+var azure = new CoreOS.Account.Provider.Azure(
+        {
+            subscription: 'xxxx-xxxxx-xxxxxxx....',
+            pem: fs.readFileSync( '/your/path/to/cer.pem' );
+        },
+
+        // Notice that we are passing current CoreOS instance
+        cos
+    );
+
+// Say to CoreOS instance that we will use this
+// on next commands
+azure.setAsCurrent();
+
+
+// Now, lets say that we want to add an azure-based node
+// into our cluster
+
+cos.nodeCreate({
+    location: 'West US',
+})
+
+// As it returns a promise (hell yeah!!), we can then
+// do something with node's info
+.then(function ( node ) {
+    console.log( node );
+});
+
+
+// Its easy right? If you think so, star this project!
+```
+
+### Cli
+
+Please check `--help` with cli for further details.
+
+```bash
+coreos --help
+```
+
+##### Examples:
+
+``` bash
+# Change to home dir so we can save config on "~/.coreos.json"
+cd ~;
+
+# Add an Azure Account
+coreos account add \
+    --provider="Azure" \
+    --subscription="xxxx-xxxxx-xxxxxxx...." \
+    --pem="/your/path/to/cer.pem";
+
+# Say to CoreOS instance that we will use this on next commands
+coreos account setCurrent \
+    --account="{account-id}"
+
+# Now, lets say that we want to add an azure-based node into our cluster
+coreos node create \
+    --location="West US"
+
+# Its easy right? If you think so, star this project!
+```
 
 
 ## Motivation

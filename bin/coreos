@@ -1,3 +1,62 @@
 #!/usr/bin/env node
 
 var CoreOS = require( '../lib' );
+var Yargs = require( 'yargs' );
+var package = require( '../package' );
+var Stack = require( 'stack-queue' );
+
+var stack = new Stack();
+
+var args = Yargs
+    .version( package.version )
+    .usage( 'coreos <commands> [options]' )
+    .help( 'h' ).alias( 'h', 'help' )
+    .demand(1, 'must provide a valid command')
+
+  // Global options
+    .options({
+        'configIgnore': {
+            alias: 'i',
+            default: false,
+            describe: 'ignore coreos json config file',
+            type: 'boolean',
+        },
+        'configPath': {
+            alias: 'c',
+            default: process.cwd() + '/.coreos.json',
+            describe: 'path to coreos json config file, if not provided, will default to your "/current/working/dir/.coreos.json"',
+            type: 'string',
+        },
+        'discovery': {
+            alias: 'd',
+            describe: 'As cloud-config is auto-generated you could specify which discovery endpoint it should be working',
+            type: 'string',
+        }
+    })
+
+  // Commands
+    .command( 'account', 'manage multiple providers accounts', function ( yargs ) {
+        console.log( 2 );
+    })
+    .command( 'node', 'manage cluster nodes', function ( yargs ) {
+
+    })
+    .command( 'deploy', 'deploy and manage services', function ( yargs ) {
+
+    })
+
+    .argv;
+
+var cos = new CoreOS({
+    configPath: ! args.configIgnore && args.configPath || false,
+    loadConfigOnInit: ! args.configIgnore,
+    discovery: args.discovery,
+});
+
+// Handle async things trough stack
+stack.dispatch( cos )
+.then(function () {
+    if ( ! args.configIgnore ) {
+        cos.configSave();
+    }
+});
