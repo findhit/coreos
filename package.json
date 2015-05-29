@@ -34,6 +34,7 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
+    "azure-common": "^0.9.12",
     "azure-mgmt-compute": "^0.9.16",
     "azure-mgmt-resource": "^2.0.0-pre.17",
     "azure-mgmt-storage": "^0.9.16",
