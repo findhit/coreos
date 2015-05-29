@@ -14,7 +14,7 @@ account provider class.
 ### Installation
 
 ```bash
-npm install --save coreos
+npm install --global coreos
 ```
 
 
