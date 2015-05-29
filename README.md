@@ -38,11 +38,11 @@ coreos account add \
     --subscription="xxxx-xxxxx-xxxxxxx...." \
     --pem="/your/path/to/cer.pem";
 
-# Say to CoreOS instance that we will use this on next commands
+# Say to CoreOS instance we will use this on next commands
 coreos account setCurrent \
     --account="{account-id}"
 
-# Now, lets say that we want to add an azure-based node into our cluster
+# Now, lets say we want to add an azure-based node into our cluster
 coreos node create \
     --location="West US"
 
@@ -80,16 +80,16 @@ var azure = new CoreOS.Account.Provider.Azure(
             pem: fs.readFileSync( '/your/path/to/cer.pem' );
         },
 
-        // Notice that we are passing current CoreOS instance
+        // Notice we are passing current CoreOS instance
         cos
     );
 
-// Say to CoreOS instance that we will use this
+// Say to CoreOS instance we will use this
 // on next commands
 azure.setAsCurrent();
 
 
-// Now, lets say that we want to add an azure-based node
+// Now, lets say we want to add an azure-based node
 // into our cluster
 
 cos.nodeCreate({
