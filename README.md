@@ -8,15 +8,59 @@ Currently we only support Microsoft Azure Cloud. Feel free to PR your own
 account provider class.
 
 
-## Installation
+
+## Cli
+
+### Installation
 
 ```bash
-npm install -g coreos
+npm install --save coreos
 ```
 
-## Usage
 
-### Node.js / io.js
+### Usage
+
+Please check `--help` with cli for further details.
+
+```bash
+coreos --help
+```
+
+##### Examples:
+
+```bash
+# Change to home dir so we can save config on "~/.coreos.json"
+cd ~;
+
+# Add an Azure Account
+coreos account add \
+    --provider="Azure" \
+    --subscription="xxxx-xxxxx-xxxxxxx...." \
+    --pem="/your/path/to/cer.pem";
+
+# Say to CoreOS instance that we will use this on next commands
+coreos account setCurrent \
+    --account="{account-id}"
+
+# Now, lets say that we want to add an azure-based node into our cluster
+coreos node create \
+    --location="West US"
+
+# Its easy right? If you think so, star this project!
+```
+
+
+
+## Node.js / io.js
+
+### Installation
+
+```bash
+npm install --save coreos
+```
+
+### Usage
+
 
 Please check [API](API.md) for further methods details.
 
@@ -60,37 +104,6 @@ cos.nodeCreate({
 
 
 // Its easy right? If you think so, star this project!
-```
-
-### Cli
-
-Please check `--help` with cli for further details.
-
-```bash
-coreos --help
-```
-
-##### Examples:
-
-``` bash
-# Change to home dir so we can save config on "~/.coreos.json"
-cd ~;
-
-# Add an Azure Account
-coreos account add \
-    --provider="Azure" \
-    --subscription="xxxx-xxxxx-xxxxxxx...." \
-    --pem="/your/path/to/cer.pem";
-
-# Say to CoreOS instance that we will use this on next commands
-coreos account setCurrent \
-    --account="{account-id}"
-
-# Now, lets say that we want to add an azure-based node into our cluster
-coreos node create \
-    --location="West US"
-
-# Its easy right? If you think so, star this project!
 ```
 
 

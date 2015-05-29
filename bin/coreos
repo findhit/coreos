@@ -34,8 +34,24 @@ var args = yargs
         var args = yargs
             .options( goptions )
 
-            .command( 'add', 'add an account', function ( yargs ) {
-                console.log( 'test ');
+            .command( 'add', 'adds an account', function ( yargs ) {
+
+            })
+
+            .command( 'remove', 'removes an account', function ( yargs ) {
+
+            })
+
+            .command( 'setCurrent', 'sets an account as current/default', function ( yargs ) {
+
+            })
+
+            .command( 'get', 'gets an account info', function ( yargs ) {
+
+            })
+
+            .command( 'list', 'gets all available accounts', function ( yargs ) {
+
             })
 
             .demand( 2, 'Please provide a account command' )
@@ -46,7 +62,7 @@ var args = yargs
         var args = yargs
             .options( goptions )
 
-            .command( 'add', 'add an account', function ( yargs ) {
+            .command( 'create', 'creates a node on the cluster', function ( yargs ) {
                 var args = yargs
                     .options({
                         'discovery': {
@@ -56,39 +72,55 @@ var args = yargs
                         }
                     })
                     .argv;
-                console.log( 'test ');
+
             })
 
-            .command( 'exec',
-                [
-                    "Executes a command on a node.",
-                    "All files that are found will be uploaded into remote node",
-                ].join(' '),
-                function ( yargs ) {
-                    
-                }
-            )
+            .command( 'destroy', 'destroys a node from the cluster', function ( yargs ) {
+
+            })
+
+            .command( 'get', 'gets a node info', function ( yargs ) {
+
+            })
+
+            .command( 'list', 'gets all available nodes', function ( yargs ) {
+
+            })
+
+            .command( 'exec', 'executes a command on a node', function ( yargs ) {
+
+            })
+
+            .command( 'ssh', 'ssh into a node', function ( yargs ) {
+
+            })
 
             .demand( 2, 'Please provide a account command' )
             .help( 'h' ).alias( 'h', 'help' )
             .argv;
     })
 
-    /*
     // TODO
-    .command( 'deploy', 'deploy and manage services', function ( yargs ) {
-        var args = yargs
-            .help( 'h' ).alias( 'h', 'help' )
-            .options( goptions )
-
-            .demand( 2, 'Please provide a account command' )
-            .argv;
+    .command( 'deploy', 'deploy and manage services', function () {
+        console.log( "not available yet" );
+        process.exit( 1 );
     })
-    */
+
+    // TODO
+    .command( 'doctor', 'checks cluster health', function () {
+        console.log( "not available yet" );
+        process.exit( 1 );
+    })
 
     .demand( 1, 'Please provide a command' )
     .help( 'h' ).alias( 'h', 'help' )
     .argv;
+
+// If we don't have nothing to do, exit
+if ( stack.length === 0 ) {
+    console.log( 'nothing to do, exiting...' );
+    process.exit( 1 );
+}
 
 var cos = new CoreOS({
     configPath: ! args.configIgnore && args.configPath || false,
