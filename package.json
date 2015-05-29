@@ -1,7 +1,7 @@
 {
   "name": "coreos",
   "version": "0.0.2",
-  "description": "the missing coreos cli for creating and managing clusters",
+  "description": "the missing coreos cli for creating and managing clusters on different providers",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/mocha --globals setImmediate,clearImmediate --check-leaks --colors -t 10000 --reporter spec $(find test/* -name '*.test.js')"
