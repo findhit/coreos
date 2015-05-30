@@ -92,6 +92,10 @@ var args = yargs
                     // Construct
                     account = cos.constructor.Account.createFromProvider( account, cos );
 
+                    // Now save it into accounts
+                    account.save();
+
+                });
 
             })
 
