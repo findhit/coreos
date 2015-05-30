@@ -35,10 +35,63 @@ var args = yargs
 
   // Commands
     .command( 'account', 'manage multiple providers accounts', function ( yargs ) {
-        var args = yargs
+        yargs
             .options( goptions )
 
             .command( 'add', 'adds an account', function ( yargs ) {
+                var args = yargs
+                    .options(Util.extend({}, goptions, {
+
+                        provider: {
+                            alias: 'p',
+                            default: 'Azure',
+                            describe: 'IaaS provider',
+                            demand: true,
+                            type: 'string',
+                        },
+
+                        'azure-subscription': {
+                            alias: 'a-sub',
+                            default: undefined,
+                            describe: 'Azure Subscription',
+                            type: 'string',
+                        },
+
+                        'azure-pem': {
+                            alias: 'a-pem',
+                            default: undefined,
+                            describe: 'Azure Certificate',
+                            type: 'string',
+                        },
+
+                    }))
+
+                    .help( 'h' ).alias( 'h', 'help' )
+                    .argv;
+
+                // Code
+                stack.queue(function ( cos ) {
+                    var Account = cos.constructor.Account;
+                    var account = {};
+
+                    account.provider = args.provider;
+
+                    if ( ! Account.Provider[ account.provider ] ) {
+                        throw new Error( "account provider not supported" );
+                    }
+
+                    // Gather data from options
+                    Util.Object.each( args, function ( value, option ) {
+                        var key = option.replace( account.provider.toLowerCase()+'-', '' );
+
+                        if ( option !== key ) {
+                            account[ key ] = value;
+                        }
+                    });
+
+                    // Construct
+                    account = cos.constructor.Account.createFromProvider( account, cos );
+
 
             })
 
