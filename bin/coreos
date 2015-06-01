@@ -58,8 +58,8 @@ var args = yargs
                             type: 'string',
                         },
 
-                        'azure-pem': {
-                            alias: 'a-pem',
+                        'azure-pem-path': {
+                            alias: 'a-pem-path',
                             default: undefined,
                             describe: 'Azure Certificate',
                             type: 'string',
@@ -86,6 +86,10 @@ var args = yargs
                         var key = option.replace( account.provider.toLowerCase()+'-', '' );
 
                         if ( option !== key ) {
+                            key = key.replace(/(\-[a-z])/g, function ( l ){
+                                return l.toUpperCase().replace('-','');
+                            });
+
                             account[ key ] = value;
                         }
                     });
@@ -199,7 +203,7 @@ var args = yargs
                     accounts = ids.map(function ( id ) {
                         var account = accounts[ id ];
                         return {
-                            id: account.id,
+                            id: id,
                             provider: account.provider
                         };
                     });
@@ -261,7 +265,7 @@ var args = yargs
 
         .command( 'print', 'prints out configuration', function () {
             stack.queue(function ( cos ) {
-                console.log( cos.config );
+                console.log( cos.configJSON() );
             });
         })
 
