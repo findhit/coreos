@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require('console.table');
 
 var Stack = require( 'stack-queue' );
 var Util = require( 'findhit-util' );
@@ -95,24 +96,116 @@ var args = yargs
                     // Now save it into accounts
                     account.save();
 
+                    console.log( account.id );
                 });
-
             })
 
             .command( 'remove', 'removes an account', function ( yargs ) {
+                var args = yargs
+                    .options(Util.extend({}, goptions, {
 
+                        'account': {
+                            alias: 'a',
+                            default: undefined,
+                            describe: 'Account id',
+                            demand: true,
+                            type: 'string',
+                        },
+
+                    }))
+
+                    .help( 'h' ).alias( 'h', 'help' )
+                    .argv;
+
+                if ( ! args.account ) {
+                    throw new Error( "please provide an account id" );
+                }
+
+                stack.queue(function ( cos ) {
+                    cos.accountRemove( args.account );
+                });
             })
 
             .command( 'setCurrent', 'sets an account as current/default', function ( yargs ) {
+                var args = yargs
+                    .options(Util.extend({}, goptions, {
 
+                        'account': {
+                            alias: 'a',
+                            default: undefined,
+                            describe: 'Account id',
+                            demand: true,
+                            type: 'string',
+                        },
+
+                    }))
+
+                    .help( 'h' ).alias( 'h', 'help' )
+                    .argv;
+
+                if ( ! args.account ) {
+                    throw new Error( "please provide an account id" );
+                }
+
+                stack.queue(function ( cos ) {
+                    var account = cos.accountCurrent( args.account );
+                    console.log( "current account set as " + account.id );
+                });
             })
 
             .command( 'get', 'gets an account info', function ( yargs ) {
+                var args = yargs
+                    .options(Util.extend({}, goptions, {
 
+                        'account': {
+                            alias: 'a',
+                            default: undefined,
+                            describe: 'Account id',
+                            demand: true,
+                            type: 'string',
+                        },
+
+                    }))
+
+                    .help( 'h' ).alias( 'h', 'help' )
+                    .argv;
+
+                if ( ! args.account ) {
+                    throw new Error( "please provide an account id" );
+                }
+
+                stack.queue(function ( cos ) {
+                    var account = cos.accountGet( args.account );
+                    console.log( account );
+                });
             })
 
             .command( 'list', 'gets all available accounts', function ( yargs ) {
+                var args = yargs
+                    .options(Util.extend({}, goptions, {}))
 
+                    .help( 'h' ).alias( 'h', 'help' )
+                    .argv;
+
+                stack.queue(function ( cos ) {
+                    var accounts = cos.accountList();
+                    var ids = Object.keys( accounts );
+
+                    if ( ids.length === 0 ) {
+                        console.log( "there aren't any configured accounts" );
+                        return;
+                    }
+
+                    accounts = ids.map(function ( id ) {
+                        var account = accounts[ id ];
+                        return {
+                            id: account.id,
+                            provider: account.provider
+                        };
+                    });
+
+                    console.table( accounts );
+                });
             })
 
             .demand( 2, 'Please provide a account command' )
