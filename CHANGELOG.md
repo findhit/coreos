@@ -3,7 +3,7 @@
 - Add API `.kill` and `coreos kill --i-am=sure` methods for easy testing
 - In case `discovery` is being generated while there are `nodes` on config, an
 error is thrown to avoid cluster division.
-
+- All ids are now uuid32 instead of `Util.uniqId`
 
 ## 0.1.0
 - node now has an independent ssh certificate;
