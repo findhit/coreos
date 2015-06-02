@@ -223,53 +223,44 @@ var args = yargs
                 var args = yargs
                     .options(Util.extend({}, goptions, {
                         'discovery': {
-                            alias: 'd',
                             describe: 'As cloud-config is auto-generated you could specify which discovery endpoint it should be working',
                             type: 'string',
                         },
 
                         'image': {
-                            alias: 'i',
                             describe: 'Image to be used',
                             default: 'stable',
                             type: 'string',
                         },
                         'location': {
-                            alias: 'l',
                             describe: 'Provider-based: location/region/zone where node should be launched',
                             default: 'North Europe',
                             type: 'string',
                         },
                         'size': {
-                            alias: 's',
                             describe: "Provider-based: machine's size where node will be deployed",
                             default: 'Small',
                             type: 'string',
                         },
                         'sshPort': {
-                            alias: 'port',
                             describe: 'ssh port, for sshing into node',
                             default: 22,
                             type: 'integer',
                         },
                         'userName': {
-                            alias: 'un',
                             describe: 'user name for sshing into node, should not be *root*',
                             default: 'core',
                             type: 'string',
                         },
                         'userPassword': {
-                            alias: 'up',
                             describe: 'user password or false if you wish to disable password login',
                             type: 'string',
                         },
                         'persistent': {
-                            alias: 'p',
                             describe: 'Will mark node as persistent when on an auto-scalling environment',
                             type: 'boolean',
                         },
                         'simulate': {
-                            alias: 's',
                             describe: 'Allows node simulation for debugging',
                             type: 'boolean',
                         },
@@ -322,11 +313,11 @@ var args = yargs
                 });
             })
 
-            .command( 'exec', 'executes a command on a node', function ( yargs ) {
+            .command( 'exec', 'executes a command on a node', function ( yargs ) {
 
             })
 
-            .command( 'ssh', 'ssh into a node', function ( yargs ) {
+            .command( 'ssh', 'ssh into a node', function ( yargs ) {
 
                 var args = yargs
                     .options(Util.extend({}, goptions, {
@@ -347,11 +338,25 @@ var args = yargs
                 stack.queue(function ( cos ) {
                     var ssh = cos.nodeSSH( args.node );
 
-                    ssh.on( 'data', console.log.bind( console ) );
                     ssh.on( 'ready', function () {
-                        ssh.end( 'echo "hello world";' );
+                        ssh.shell(function ( err, stream ) {
+                            if ( err ) {
+                                process.exit( 1 );
+                            }
+
+                            // pipe input into string
+                            process.stdin.pipe( stream );
+
+                            // pipe stream output and err into process
+                            stream.pipe( process.stdout );
+                            stream.stderr.pipe( process.stderr );
+
+                            stream.on( 'close', function() {
+                                process.exit( 0 );
+                            });
+                        });
                     });
-                })
+                });
             })
 
             .demand( 2, 'Please provide a account command' )
