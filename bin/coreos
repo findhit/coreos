@@ -45,7 +45,6 @@ var args = yargs
 
                         provider: {
                             alias: 'p',
-                            default: 'Azure',
                             describe: 'IaaS provider',
                             demand: true,
                             type: 'string',
@@ -227,9 +226,62 @@ var args = yargs
                             alias: 'd',
                             describe: 'As cloud-config is auto-generated you could specify which discovery endpoint it should be working',
                             type: 'string',
-                        }
+                        },
+
+                        'image': {
+                            alias: 'i',
+                            describe: 'Image to be used',
+                            default: 'stable',
+                            type: 'string',
+                        },
+                        'location': {
+                            alias: 'l',
+                            describe: 'Provider-based: location/region/zone where node should be launched',
+                            default: 'North Europe',
+                            type: 'string',
+                        },
+                        'size': {
+                            alias: 's',
+                            describe: "Provider-based: machine's size where node will be deployed",
+                            default: 'Small',
+                            type: 'string',
+                        },
+                        'sshPort': {
+                            alias: 'port',
+                            describe: 'ssh port, for sshing into node',
+                            default: 22,
+                            type: 'integer',
+                        },
+                        'userName': {
+                            alias: 'un',
+                            describe: 'user name for sshing into node, should not be *root*',
+                            default: 'core',
+                            type: 'string',
+                        },
+                        'userPassword': {
+                            alias: 'up',
+                            describe: 'user password or false if you wish to disable password login',
+                            type: 'string',
+                        },
+                        'persistent': {
+                            alias: 'p',
+                            describe: 'Will mark node as persistent when on an auto-scalling environment',
+                            type: 'boolean',
+                        },
+                        'simulate': {
+                            alias: 's',
+                            describe: 'Allows node simulation for debugging',
+                            type: 'boolean',
+                        },
                     })
                     .argv;
+
+                stack.queue(function ( cos ) {
+                    return cos.nodeCreate( args )
+                    .then(function ( node ) {
+                        console.log( node.id );
+                    });
+                });
 
             })
 
