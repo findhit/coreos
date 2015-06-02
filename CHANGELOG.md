@@ -1,4 +1,6 @@
 ## Upcoming
+
+## 0.1.0
 - node now has an independent ssh certificate;
 - CLI actions for: account, configs, node and services management;
 - Added `.nodeSSH` method
