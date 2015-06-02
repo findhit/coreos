@@ -221,7 +221,7 @@ var args = yargs
 
             .command( 'create', 'creates a node on the cluster', function ( yargs ) {
                 var args = yargs
-                    .options({
+                    .options(Util.extend({}, goptions, {
                         'discovery': {
                             alias: 'd',
                             describe: 'As cloud-config is auto-generated you could specify which discovery endpoint it should be working',
