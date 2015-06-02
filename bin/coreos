@@ -278,7 +278,28 @@ var args = yargs
             })
 
             .command( 'destroy', 'destroys a node from the cluster', function ( yargs ) {
+                var args = yargs
+                    .options(Util.extend({}, goptions, {
+                        'node': {
+                            alias: 'n',
+                            describe: 'Node id',
+                            demand: true,
+                            type: 'string',
+                        },
+                    }))
+                    .help( 'h' ).alias( 'h', 'help' )
+                    .argv;
 
+                if ( ! args.node ) {
+                    throw new Error( "please provide an node id" );
+                }
+
+                stack.queue(function ( cos ) {
+                    return cos.nodeDestroy( args.node )
+                    .then(function ( node ) {
+                        console.log( node.id );
+                    });
+                });
             })
 
             .command( 'get', 'gets a node info', function ( yargs ) {
