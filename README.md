@@ -46,6 +46,9 @@ coreos account setCurrent \
 coreos node create \
     --location="West US"
 
+# for instance you may want to access to node shell
+coreo node ssh --node="{nodeid}"
+
 # Its easy right? If you think so, star this project!
 ```
 
