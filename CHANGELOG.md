@@ -1,5 +1,6 @@
 ## Upcoming
 - Added support for multiple nodes creation on CLI
+- Add API `.kill` and `coreos kill --i-am=sure` methods for easy testing
 
 ## 0.1.0
 - node now has an independent ssh certificate;

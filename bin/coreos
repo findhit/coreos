@@ -429,6 +429,30 @@ var args = yargs
     })
 
     // TODO
+    .command( 'kill', 'destroys all nodes and discovery on the cluster', function ( yargs ) {
+        var args = yargs
+            .options(Util.extend({}, goptions, {
+
+                'i-am': {
+                    describe: 'you must set this as "sure"',
+                    demand: true,
+                    type: 'string',
+                }
+
+            }))
+            .help( 'h' ).alias( 'h', 'help' )
+            .argv;
+
+        if ( args[ 'i-am' ] !== 'sure' ) {
+            throw new Error( "please set 'i-am' as 'sure'" );
+        }
+
+        stack.queue(function ( cos ) {
+            return cos.kill();
+        });
+    })
+
+    // TODO
     .command( 'deploy', 'deploy and manage services', function () {
         console.log( "not available yet" );
         process.exit( 1 );
