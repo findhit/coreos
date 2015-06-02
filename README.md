@@ -52,6 +52,8 @@ coreo node ssh --node="{nodeid}"
 # Its easy right? If you think so, star this project!
 ```
 
+[See more examples](examples/cli)
+
 
 
 ## Node.js / io.js
@@ -108,6 +110,9 @@ cos.nodeCreate({
 
 // Its easy right? If you think so, star this project!
 ```
+
+[See more examples](examples/node)
+
 
 
 ## Motivation
