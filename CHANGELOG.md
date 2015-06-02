@@ -1,4 +1,5 @@
 ## Upcoming
+- Added support for multiple nodes creation on CLI
 
 ## 0.1.0
 - node now has an independent ssh certificate;

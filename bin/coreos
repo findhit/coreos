@@ -5,6 +5,7 @@ var Stack = require( 'stack-queue' );
 var Util = require( 'findhit-util' );
 var yargs = require( 'yargs' );
 var package = require( '../package' );
+var Promise = require( 'bluebird' );
 
 var stack = new Stack();
 
@@ -222,6 +223,14 @@ var args = yargs
             .command( 'create', 'creates a node on the cluster', function ( yargs ) {
                 var args = yargs
                     .options(Util.extend({}, goptions, {
+
+                        'numberOfNodes': {
+                            describe: 'number of nodes that should be created',
+                            default: 1,
+                            demand: true,
+                            type: 'integer',
+                        },
+
                         'discovery': {
                             describe: 'As cloud-config is auto-generated you could specify which discovery endpoint it should be working',
                             type: 'string',
@@ -269,10 +278,18 @@ var args = yargs
                     .argv;
 
                 stack.queue(function ( cos ) {
-                    return cos.nodeCreate( args )
-                    .then(function ( node ) {
-                        console.log( node.id );
-                    });
+                    var promise = Promise.cast();
+
+                    for( var i = 0; i < args.numberOfNodes; i++ ) {
+                        promise = promise.then(function () {
+                            return cos.nodeCreate( args );
+                        })
+                        .then(function ( node ) {
+                            console.log( node.id );
+                        });
+                    }
+
+                    return promise;
                 });
 
             })
