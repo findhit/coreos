@@ -273,7 +273,8 @@ var args = yargs
                             describe: 'Allows node simulation for debugging',
                             type: 'boolean',
                         },
-                    })
+                    }))
+                    .help( 'h' ).alias( 'h', 'help' )
                     .argv;
 
                 stack.queue(function ( cos ) {
@@ -294,7 +295,31 @@ var args = yargs
             })
 
             .command( 'list', 'gets all available nodes', function ( yargs ) {
+                var args = yargs
+                    .options(Util.extend({}, goptions, {}))
 
+                    .help( 'h' ).alias( 'h', 'help' )
+                    .argv;
+
+                stack.queue(function ( cos ) {
+                    var nodes = cos.nodeList();
+                    var ids = Object.keys( nodes );
+
+                    if ( ids.length === 0 ) {
+                        console.log( "there aren't any provisioned nodes" );
+                        return;
+                    }
+
+                    nodes = ids.map(function ( id ) {
+                        var node = nodes[ id ];
+                        return {
+                            id: id,
+                            account: node.account
+                        };
+                    });
+
+                    console.table( nodes );
+                });
             })
 
             .command( 'exec', 'executes a command on a node', function ( yargs ) {
@@ -303,6 +328,30 @@ var args = yargs
 
             .command( 'ssh', 'ssh into a node', function ( yargs ) {
 
+                var args = yargs
+                    .options(Util.extend({}, goptions, {
+                        'node': {
+                            alias: 'n',
+                            describe: 'Node id',
+                            demand: true,
+                            type: 'string',
+                        },
+                    }))
+                    .help( 'h' ).alias( 'h', 'help' )
+                    .argv;
+
+                if ( ! args.node ) {
+                    throw new Error( "please provide an node id" );
+                }
+
+                stack.queue(function ( cos ) {
+                    var ssh = cos.nodeSSH( args.node );
+
+                    ssh.on( 'data', console.log.bind( console ) );
+                    ssh.on( 'ready', function () {
+                        ssh.end( 'echo "hello world";' );
+                    });
+                })
             })
 
             .demand( 2, 'Please provide a account command' )
