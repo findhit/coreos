@@ -52,7 +52,7 @@ coreo node ssh --node="{nodeid}"
 # Its easy right? If you think so, star this project!
 ```
 
-[See more examples](examples/cli)
+[See more examples](docs/cli/README.md)
 
 
 
@@ -111,7 +111,7 @@ cos.nodeCreate({
 // Its easy right? If you think so, star this project!
 ```
 
-[See more examples](examples/node)
+[See more examples](docs/node/README.md)
 
 
 
