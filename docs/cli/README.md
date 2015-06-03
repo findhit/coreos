@@ -11,3 +11,4 @@
 
 ### Managing cluster
 * [Destroying a cluster](destroying-a-cluster.md)
+* [Remote controlling fleetctl](remote-fleetctl.md)

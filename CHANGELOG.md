@@ -1,4 +1,5 @@
 ## Upcoming
+- Added `coreos fleetctl -- args` compability
 - Added docs and changed `examples/` folder to `docs/`
 - Added support for multiple nodes creation on CLI
 - Add API `.kill` and `coreos kill --i-am=sure` methods for easy testing

@@ -458,9 +458,28 @@ var args = yargs
     })
 
     // TODO
-    .command( 'deploy', 'deploy and manage services', function () {
-        console.log( "not available yet" );
-        process.exit( 1 );
+    .command( 'fleetctl', 'deploy and manage services', function ( yargs ) {
+        var args = yargs
+            .options(Util.extend({}, goptions))
+            .help( 'h' ).alias( 'h', 'help' )
+            .argv;
+
+        // remove fleetctl from it (dirty hack)
+        args._.splice( args._.indexOf( 'fleetctl' ), 1 );
+
+        if ( args._.length === 0 ) {
+            throw new Error( "Usage: coreos fleetctl -- [fleetctl options]" );
+        }
+
+        stack.queue(function ( cos ) {
+            return cos.fleetctl( args._ )
+            .then(function ( stream ) {
+
+                stream.pipe( process.stdout );
+                stream.stderr.pipe( process.stderr );
+
+            });
+        });
     })
 
     // TODO
