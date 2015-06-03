@@ -11,5 +11,5 @@ Thumbs.db
 npm-debug.log
 
 test/
-examples/
+docs/
 .*

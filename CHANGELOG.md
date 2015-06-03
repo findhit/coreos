@@ -1,4 +1,5 @@
 ## Upcoming
+- Added docs and changed `examples/` folder to `docs/`
 - Added support for multiple nodes creation on CLI
 - Add API `.kill` and `coreos kill --i-am=sure` methods for easy testing
 - In case `discovery` is being generated while there are `nodes` on config, an
