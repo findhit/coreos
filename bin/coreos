@@ -286,6 +286,11 @@ var args = yargs
                         })
                         .then(function ( node ) {
                             console.log( node.id );
+                        })
+                        .then(function () {
+                            if ( ! args.configIgnore ) {
+                                cos.configSave();
+                            }
                         });
                     }
 
