@@ -1,4 +1,6 @@
 ## Upcoming
+
+## 0.1.1
 - Added `coreos fleetctl -- args` compability
 - Added docs and changed `examples/` folder to `docs/`
 - Added support for multiple nodes creation on CLI
