@@ -231,11 +231,6 @@ var args = yargs
                             type: 'integer',
                         },
 
-                        'discovery': {
-                            describe: 'As cloud-config is auto-generated you could specify which discovery endpoint it should be working',
-                            type: 'string',
-                        },
-
                         'image': {
                             describe: 'Image to be used',
                             default: 'stable',
@@ -433,8 +428,7 @@ var args = yargs
         .argv;
     })
 
-    // TODO
-    .command( 'kill', 'destroys all nodes and discovery on the cluster', function ( yargs ) {
+    .command( 'kill', 'destroys all nodes on the cluster', function ( yargs ) {
         var args = yargs
             .options(Util.extend({}, goptions, {
 

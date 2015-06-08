@@ -1,4 +1,5 @@
 ## Upcoming
+- discarded discovery from the equation, this now handles cluster initialize
 
 ## 0.1.1
 - Added `coreos fleetctl -- args` compability

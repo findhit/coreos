@@ -5,9 +5,6 @@
 In case you have provisioned some nodes into a new cluster and you want to
 destroy all of them to start over, we have a command for that!
 
-Clusters should have a discovery url that should be changed whenever you want
-to start a new one.
-
 `coreos kill` command handles the hard job of deleting existing nodes and
 configured accounts on-the-fly.
 
