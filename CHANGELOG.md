@@ -3,6 +3,8 @@
 - added `.bootstap` for initialize a cluster on multiple accounts
 - using `group` instead of `image` for selecting release group channel
 - we are now using `etcd2` instead of `etcd`
+- after each `.create` we now wait until node is up by default for a better flow
+control when creating lots of nodes
 - added `coreos etcdctl -- args` compability
 
 ## 0.1.1
