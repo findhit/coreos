@@ -516,6 +516,30 @@ var args = yargs
         });
     })
 
+    .command( 'etcdctl', 'deploy and manage services', function ( yargs ) {
+        var args = yargs
+            .options(Util.extend({}, goptions))
+            .help( 'h' ).alias( 'h', 'help' )
+            .argv;
+
+        // remove etcdctl from it (dirty hack)
+        args._.splice( args._.indexOf( 'etcdctl' ), 1 );
+
+        if ( args._.length === 0 ) {
+            throw new Error( "Usage: coreos etcdctl -- [etcdctl options]" );
+        }
+
+        stack.queue(function ( cos ) {
+            return cos.etcdctl( args._ )
+            .then(function ( stream ) {
+
+                stream.pipe( process.stdout );
+                stream.stderr.pipe( process.stderr );
+
+            });
+        });
+    })
+
     // TODO
     .command( 'doctor', 'checks cluster health', function () {
         console.log( "not available yet" );
