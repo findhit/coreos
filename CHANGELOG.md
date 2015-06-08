@@ -6,6 +6,8 @@
 - after each `.create` we now wait until node is up by default for a better flow
 control when creating lots of nodes
 - added `coreos etcdctl -- args` compability
+- some changes on `docs/` adding bootstrap as default method for creating a
+cluster
 
 ## 0.1.1
 - Added `coreos fleetctl -- args` compability
