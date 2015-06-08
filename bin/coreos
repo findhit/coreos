@@ -428,6 +428,46 @@ var args = yargs
         .argv;
     })
 
+    .command( 'bootstrap', 'initializes a cluster', function ( yargs ) {
+        var args = yargs
+            .options(Util.extend({}, goptions, {
+
+                'numberOfNodes': {
+                    describe: 'number of nodes for initial cluster',
+                    demand: true,
+                    default: 3,
+                    type: 'integer',
+                },
+
+                'account': {
+                    describe: 'provider account to be used, if not defined, bootstrap will spread nodes accross accounts',
+                    type: 'string',
+                },
+
+                'image': {
+                    describe: 'Image to be used',
+                    default: 'stable',
+                    type: 'string',
+                },
+                'location': {
+                    describe: 'Provider-based: location/region/zone where node should be launched',
+                    default: 'North Europe',
+                    type: 'string',
+                },
+                'size': {
+                    describe: "Provider-based: machine's size where node will be deployed",
+                    default: 'Small',
+                    type: 'string',
+                },
+            }))
+            .help( 'h' ).alias( 'h', 'help' )
+            .argv;
+
+        stack.queue(function ( cos ) {
+            return cos.bootstrap( args );
+        });
+    })
+
     .command( 'kill', 'destroys all nodes on the cluster', function ( yargs ) {
         var args = yargs
             .options(Util.extend({}, goptions, {

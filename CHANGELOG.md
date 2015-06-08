@@ -1,5 +1,6 @@
 ## Upcoming
 - discarded discovery from the equation, this now handles cluster initialize
+- added `.bootstap` for initialize a cluster on multiple accounts
 
 ## 0.1.1
 - Added `coreos fleetctl -- args` compability
