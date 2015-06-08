@@ -24,6 +24,5 @@ error is thrown to avoid cluster division.
 - Added `.nodeSSH` method
 - CLI action added for ssh into node: `coreos node ssh --node="id"`
 
-
 ## 0.0.1
 npm name allocation

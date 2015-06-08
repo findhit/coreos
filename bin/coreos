@@ -491,7 +491,6 @@ var args = yargs
         });
     })
 
-    // TODO
     .command( 'fleetctl', 'deploy and manage services', function ( yargs ) {
         var args = yargs
             .options(Util.extend({}, goptions))
