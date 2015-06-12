@@ -231,9 +231,9 @@ var args = yargs
                             type: 'integer',
                         },
 
-                        'image': {
-                            describe: 'Image to be used',
-                            default: 'stable',
+                        'group': {
+                            describe: 'Image group to be used: stable, beta or alpha',
+                            default: 'beta',
                             type: 'string',
                         },
                         'location': {
@@ -444,9 +444,9 @@ var args = yargs
                     type: 'string',
                 },
 
-                'image': {
-                    describe: 'Image to be used',
-                    default: 'stable',
+                'group': {
+                    describe: 'Image group to be used: stable, beta or alpha',
+                    default: 'beta',
                     type: 'string',
                 },
                 'location': {
