@@ -13,6 +13,8 @@ architectures
 - added new accountGet features such as random or iterative pick
 - fixed problems related to update channel group settings
 - enriched metadata content for better future cluster node filtering
+- added a doc which specifies how to create a scalable and production ready
+cluster cross locations
 
 ## 0.1.1
 - Added `coreos fleetctl -- args` compability

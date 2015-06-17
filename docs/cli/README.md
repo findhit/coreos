@@ -10,5 +10,6 @@
 * [Deploying Kubernetes into a cloud](deploying-kubernetes.md)
 
 ### Managing cluster
+* [Creating a production ready cluster](production-ready-cluster.md)
 * [Destroying a cluster](destroying-a-cluster.md)
 * [Remote controlling fleetctl](remote-fleetctl.md)
