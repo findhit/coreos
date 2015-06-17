@@ -446,7 +446,7 @@ var args = yargs
 
                 'group': {
                     describe: 'Image group to be used: stable, beta or alpha',
-                    default: 'beta',
+                    default: 'stable',
                     type: 'string',
                 },
                 'location': {
