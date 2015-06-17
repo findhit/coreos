@@ -1,6 +1,6 @@
 {
   "name": "coreos",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "the missing CoreOS cli for creating and managing clusters on different providers",
   "main": "index.js",
   "scripts": {
