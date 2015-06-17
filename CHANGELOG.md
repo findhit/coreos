@@ -8,6 +8,8 @@ control when creating lots of nodes
 - added `coreos etcdctl -- args` compability
 - some changes on `docs/` adding bootstrap as default method for creating a
 cluster
+- added `role` options so we can specify different kind of coreos cluster
+architectures
 
 ## 0.1.1
 - Added `coreos fleetctl -- args` compability
