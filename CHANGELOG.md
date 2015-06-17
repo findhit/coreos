@@ -10,6 +10,7 @@ control when creating lots of nodes
 cluster
 - added `role` options so we can specify different kind of coreos cluster
 architectures
+- added new accountGet features such as random or iterative pick
 
 ## 0.1.1
 - Added `coreos fleetctl -- args` compability
