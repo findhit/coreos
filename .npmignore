@@ -13,3 +13,5 @@ npm-debug.log
 test/
 docs/
 .*
+
+presskit/
