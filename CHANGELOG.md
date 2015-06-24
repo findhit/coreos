@@ -1,4 +1,5 @@
 ## Upcoming
+- added logo and press assets
 
 ## 0.1.2
 - discarded discovery from the equation, this now handles cluster initialize
