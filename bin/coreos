@@ -233,7 +233,12 @@ var args = yargs
 
                         'group': {
                             describe: 'Image group to be used: stable, beta or alpha',
-                            default: 'beta',
+                            default: 'stable',
+                            type: 'string',
+                        },
+                        'role': {
+                            describe: 'Role for current node: worker or services',
+                            default: 'worker',
                             type: 'string',
                         },
                         'location': {
