@@ -1,4 +1,5 @@
 ## Upcoming
+- Fix epheremal disk detection, formatting and mounting
 
 ## 0.1.2
 - discarded discovery from the equation, this now handles cluster initialize
