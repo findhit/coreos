@@ -357,7 +357,33 @@ var args = yargs
             })
 
             .command( 'exec', 'executes a command on a node', function ( yargs ) {
+                var args = yargs
+                    .options(Util.extend({}, goptions, {
+                        'node': {
+                            alias: 'n',
+                            describe: 'Node id',
+                            demand: true,
+                            type: 'string',
+                            default: 'random'
+                        },
+                    }))
+                    .help( 'h' ).alias( 'h', 'help' )
+                    .argv;
 
+                // remove commands from it (dirty hack)
+                args._.splice( 0, 2 );
+
+                if ( args._.length === 0 ) {
+                    throw new Error( "Usage: coreos node exec -- [command]" );
+                }
+
+                stack.queue(function ( cos ) {
+                    return cos.nodeExec( args.node, args._ )
+                    .spread(function ( ssh, stream ) {
+                        stream.pipe( process.stdout );
+                        stream.stderr.pipe( process.stderr );
+                    });
+                });
             })
 
             .command( 'ssh', 'ssh into a node', function ( yargs ) {
@@ -511,11 +537,9 @@ var args = yargs
 
         stack.queue(function ( cos ) {
             return cos.fleetctl( args._ )
-            .then(function ( stream ) {
-
+            .spread(function ( ssh, stream ) {
                 stream.pipe( process.stdout );
                 stream.stderr.pipe( process.stderr );
-
             });
         });
     })
@@ -535,11 +559,9 @@ var args = yargs
 
         stack.queue(function ( cos ) {
             return cos.etcdctl( args._ )
-            .then(function ( stream ) {
-
+            .spread(function ( ssh, stream ) {
                 stream.pipe( process.stdout );
                 stream.stderr.pipe( process.stderr );
-
             });
         });
     })

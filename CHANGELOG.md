@@ -1,5 +1,8 @@
 ## Upcoming
 - Fix ephemeral disk detection, formatting and mounting
+- Added logic for execute remote commands with detection and uploading of local
+files to remote server before executing command. Detection is made by appending
+`:` before a local path.
 
 ## 0.1.2
 - discarded discovery from the equation, this now handles cluster initialize

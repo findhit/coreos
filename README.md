@@ -47,7 +47,10 @@ coreos node create \
     --location="West US"
 
 # for instance you may want to access to node shell
-coreo node ssh --node="{nodeid}"
+coreos node ssh --node="{nodeid}"
+
+# Or execute a command with local files (example, submitting an unit)
+coreos node exec -- fleetctl submit :/my/local/unit.service
 
 # Its easy right? If you think so, star this project!
 ```
