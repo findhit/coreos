@@ -1,4 +1,6 @@
 ## Upcoming
+
+## 0.1.3
 - Fix ephemeral disk detection, formatting and mounting
 - Added logic for execute remote commands with detection and uploading of local
 files to remote server before executing command. Detection is made by appending
