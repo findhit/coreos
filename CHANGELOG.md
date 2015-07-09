@@ -1,4 +1,6 @@
 ## Upcoming
+- Fixed a bug on Azure `format-ephemeral.service` where it was running before
+`mnt-resource.mount`.
 
 ## 0.1.3
 - Fix ephemeral disk detection, formatting and mounting
