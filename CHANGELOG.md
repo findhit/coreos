@@ -1,7 +1,8 @@
 ## Upcoming
 - Fixed a bug on Azure `format-ephemeral.service` where it was running before
 `mnt-resource.mount`.
-- `coreos node list` now is more verbose about each node.
+- `coreos node list` is now more verbose about each node.
+- `coreos [etcdctl|fleetctl]` is using only `role=services` nodes.
 
 ## 0.1.3
 - Fix ephemeral disk detection, formatting and mounting
