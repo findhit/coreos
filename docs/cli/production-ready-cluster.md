@@ -1,5 +1,8 @@
 [<- Back to index](README.md)
 
+__WARNING__: Currently deprecated since we have to use `bootstrap` to initialize
+a cluster.
+
 # Creating a production-ready cluster
 
 After reviewing some CoreOS architectures we finally edited this to respond to

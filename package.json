@@ -48,9 +48,9 @@
     "findhit-class": "^0.1.1",
     "findhit-util": "^0.2.7",
     "pem": "^1.7.2",
+    "request-promise": "^0.4.2",
     "ssh2": "^0.4.8",
     "stack-queue": "0.0.6",
-    "sync-request": "^2.0.1",
     "yamljs": "^0.2.3",
     "yargs": "^3.9.1"
   }
