@@ -6,6 +6,7 @@
 - Using discovery again but without the hassle that we had before.
 - `coreos kill` enhanced by starting node's destruction at the same time
 - `coreos bootstrap` enhanced by pooling different node creations per account
+- Added `host` key to `coreos node list`
 
 ## 0.1.3
 - Fix ephemeral disk detection, formatting and mounting

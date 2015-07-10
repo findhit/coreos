@@ -353,6 +353,7 @@ var args = yargs
                             location: node.location,
                             persistent: node.persistent,
                             size: node.size,
+                            host: node.host,
                         };
                     });
 
