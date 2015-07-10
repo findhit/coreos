@@ -8,6 +8,7 @@
 - `coreos bootstrap` enhanced by pooling different node creations per account
 - Added `host` key to `coreos node list`
 - Cloudconfig changed to make `docker.service` wait for `flanneld.service`
+- `coreos node exec` has now a better arguments parser.
 
 ## 0.1.3
 - Fix ephemeral disk detection, formatting and mounting
