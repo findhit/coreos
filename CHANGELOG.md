@@ -7,6 +7,7 @@
 - `coreos kill` enhanced by starting node's destruction at the same time
 - `coreos bootstrap` enhanced by pooling different node creations per account
 - Added `host` key to `coreos node list`
+- Cloudconfig changed to make `docker.service` wait for `flanneld.service`
 
 ## 0.1.3
 - Fix ephemeral disk detection, formatting and mounting
