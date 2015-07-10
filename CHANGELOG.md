@@ -4,6 +4,7 @@
 - `coreos node list` is now more verbose about each node.
 - `coreos [etcdctl|fleetctl]` is using only `role=services` nodes.
 - Using discovery again but without the hassle that we had before.
+- `coreos kill` enhanced by starting node's destruction at the same time
 
 ## 0.1.3
 - Fix ephemeral disk detection, formatting and mounting
