@@ -1,0 +1,25 @@
+[Unit]
+Description=Vulcan extensible Load Balancer
+After=docker.service
+Requires=docker.service
+
+[Service]
+EnvironmentFile=/etc/environment
+Environment=VULCAN_VERSION=v0.8.0-beta.3
+TimeoutStartSec=0
+Restart=always
+RestartSec=10s
+ExecStartPre=/usr/bin/docker pull mailgun/vulcand:${VULCAN_VERSION}
+ExecStart=/usr/bin/docker run --rm --name vulcand \
+    -p 80:80 -p 8182:8182 \
+    mailgun/vulcand:${VULCAN_VERSION} \
+    /go/bin/vulcand \
+        -apiInterface=0.0.0.0 \
+        -interface=0.0.0.0 \
+        -etcd=http://${COREOS_PRIVATE_IPV4}:2379 \
+        -port=80 -apiPort=8182
+ExecStopPost=-/usr/bin/docker rm vulcand
+
+[X-Fleet]
+MachineMetadata="role=services"
+Global=true
