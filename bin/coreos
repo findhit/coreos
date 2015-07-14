@@ -354,6 +354,7 @@ var args = yargs
                             persistent: node.persistent,
                             size: node.size,
                             host: node.host,
+                            ip: node.ip,
                         };
                     });
 
@@ -572,9 +573,15 @@ var args = yargs
     })
 
     // TODO
-    .command( 'doctor', 'checks cluster health', function () {
-        console.log( "not available yet" );
-        process.exit( 1 );
+    .command( 'doctor', 'checks cluster health', function ( yargs ) {
+        var args = yargs
+            .options(Util.extend({}, goptions))
+            .help( 'h' ).alias( 'h', 'help' )
+            .argv;
+
+        stack.queue(function ( cos ) {
+            return cos.doctor();
+        });
     })
 
     .demand( 1, 'Please provide a command' )
