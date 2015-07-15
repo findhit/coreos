@@ -352,7 +352,7 @@ var args = yargs
                         var node = nodes[ id ];
                         return {
                             id: id,
-                            account: node.account,
+                            account: node.account.id,
                             role: node.role,
                             location: node.location,
                             persistent: node.persistent,
