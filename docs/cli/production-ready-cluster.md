@@ -8,7 +8,7 @@ a cluster.
 After reviewing some CoreOS architectures we finally edited this to respond to
 architecture changes needs.
 
-As so, we added a `role` option to specify if node is part of cluster `services`
+As so, we added a `role` option to specify if node is part of cluster `boss`
 providers or just a `worker`.
 
 The example we will provide to you on this guide consists into:
@@ -33,7 +33,7 @@ number, id or `random`.
 coreos node create \
     --provider="Azure" \
     --numberOfNodes=2 \
-    --role="services" \
+    --role="boss" \
     --location="North Europe" \
     --size="Medium" \
     --debug # Just because I like to see things happening :)
@@ -41,7 +41,7 @@ coreos node create \
 coreos node create \
     --provider="Azure" \
     --numberOfNodes=2 \
-    --role="services" \
+    --role="boss" \
     --location="West US" \
     --size="Medium" \
     --debug # Just because I like to see things happening :)
@@ -77,5 +77,5 @@ coreos node create \
 ## Scalling
 
 You can scale cluster by:
-* location, by adding or removing `services` nodes on different locations;
+* location, by adding or removing `boss` nodes on different locations;
 * processing power, by adding or removing `worker` nodes on each location;
