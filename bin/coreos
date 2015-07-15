@@ -297,6 +297,10 @@ var args = yargs
                     return promise;
                 });
 
+                stack.queue(function ( cos ) {
+                    return cos.doctor();
+                });
+
             })
 
             .command( 'destroy', 'destroys a node from the cluster', function ( yargs ) {
@@ -322,10 +326,10 @@ var args = yargs
                         console.log( node.id );
                     });
                 });
-            })
 
-            .command( 'get', 'gets a node info', function ( yargs ) {
-
+                stack.queue(function ( cos ) {
+                    return cos.doctor();
+                });
             })
 
             .command( 'list', 'gets all available nodes', function ( yargs ) {
@@ -348,12 +352,13 @@ var args = yargs
                         var node = nodes[ id ];
                         return {
                             id: id,
-                            account: node.account,
+                            account: node.account.id,
                             role: node.role,
                             location: node.location,
                             persistent: node.persistent,
                             size: node.size,
                             host: node.host,
+                            ip: node.ip,
                         };
                     });
 
@@ -502,6 +507,10 @@ var args = yargs
         stack.queue(function ( cos ) {
             return cos.bootstrap( args );
         });
+
+        stack.queue(function ( cos ) {
+            return cos.doctor();
+        });
     })
 
     .command( 'kill', 'destroys all nodes on the cluster', function ( yargs ) {
@@ -572,9 +581,15 @@ var args = yargs
     })
 
     // TODO
-    .command( 'doctor', 'checks cluster health', function () {
-        console.log( "not available yet" );
-        process.exit( 1 );
+    .command( 'doctor', 'checks cluster health', function ( yargs ) {
+        var args = yargs
+            .options(Util.extend({}, goptions))
+            .help( 'h' ).alias( 'h', 'help' )
+            .argv;
+
+        stack.queue(function ( cos ) {
+            return cos.doctor();
+        });
     })
 
     .demand( 1, 'Please provide a command' )
