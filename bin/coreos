@@ -297,6 +297,10 @@ var args = yargs
                     return promise;
                 });
 
+                stack.queue(function ( cos ) {
+                    return cos.doctor();
+                });
+
             })
 
             .command( 'destroy', 'destroys a node from the cluster', function ( yargs ) {
@@ -322,10 +326,10 @@ var args = yargs
                         console.log( node.id );
                     });
                 });
-            })
 
-            .command( 'get', 'gets a node info', function ( yargs ) {
-
+                stack.queue(function ( cos ) {
+                    return cos.doctor();
+                });
             })
 
             .command( 'list', 'gets all available nodes', function ( yargs ) {
@@ -502,6 +506,10 @@ var args = yargs
 
         stack.queue(function ( cos ) {
             return cos.bootstrap( args );
+        });
+
+        stack.queue(function ( cos ) {
+            return cos.doctor();
         });
     })
 
