@@ -396,6 +396,29 @@ var args = yargs
                 });
             })
 
+            .command( 'restart', 'restarts a node', function ( yargs ) {
+                var args = yargs
+                    .options(Util.extend({}, goptions, {
+                        'node': {
+                            alias: 'n',
+                            describe: 'Node id',
+                            demand: true,
+                            type: 'string',
+                        },
+                    }))
+                    .help( 'h' ).alias( 'h', 'help' )
+                    .argv;
+
+                if ( ! args.node ) {
+                    throw new Error( "please provide an node id" );
+                }
+
+                stack.queue(function ( cos ) {
+                    return cos.nodeRestart( args.node );
+                });
+
+            })
+
             .command( 'ssh', 'ssh into a node', function ( yargs ) {
 
                 var args = yargs
