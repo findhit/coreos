@@ -492,6 +492,21 @@ var args = yargs
         .argv;
     })
 
+    .command( 'rolling', 'do rolling things', function ( yargs ) {
+        yargs
+        .options( goptions )
+
+        .command( 'restart', 'prints out configuration', function () {
+            stack.queue(function ( cos ) {
+                return cos.rollingRestart();
+            });
+        })
+
+        .demand( 2, 'Please provide a account command' )
+        .help( 'h' ).alias( 'h', 'help' )
+        .argv;
+    })
+
     .command( 'bootstrap', 'initializes a cluster', function ( yargs ) {
         var args = yargs
             .options(Util.extend({}, goptions, {
@@ -529,6 +544,12 @@ var args = yargs
 
         stack.queue(function ( cos ) {
             return cos.bootstrap( args );
+        });
+
+        stack.queue(function ( cos ) {
+            if ( ! args.configIgnore ) {
+                return cos.configSave();
+            }
         });
 
         stack.queue(function ( cos ) {

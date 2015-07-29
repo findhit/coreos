@@ -13,7 +13,7 @@
 - Added a command which keeps your cluster working and secure - `coreos doctor`
 - Added a firewall rules management per node to close a security issue to avoid
 connections to etcd server from the outside world.
-- Using VXNET on flannel and fixed an issue related with IP exposure.
+- Using a pre release of flannel instead because of NAT support.
 
 ## 0.1.3
 - Fix ephemeral disk detection, formatting and mounting
