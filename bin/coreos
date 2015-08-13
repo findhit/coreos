@@ -652,7 +652,7 @@ process.env.DEBUG = args.debug ? 'coreos:*' : '';
 var CoreOS = require( '../lib' );
 
 var cos = new CoreOS({
-    configPath: ! args.configIgnore && args.configPath || false,
+    configPath: ! args.configIgnore && ( process.env.COREOS_CONFIG || args.configPath ) || false,
     loadConfigOnInit: ! args.configIgnore,
 });
 

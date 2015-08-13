@@ -14,6 +14,9 @@
 - Added a firewall rules management per node to close a security issue to avoid
 connections to etcd server from the outside world.
 - Using a pre release of flannel instead because of NAT support.
+- Added a service that checks for private and public ips, if they arent present,
+it will reboot node.
+- Added an Environment Variable for allowing persistent config path setting.
 
 ## 0.1.3
 - Fix ephemeral disk detection, formatting and mounting

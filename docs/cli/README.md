@@ -2,6 +2,9 @@
 
 <small>Feel free to contribute your own examples! :)</small>
 
+### Productivity
+* [Working with multiple clusters][multiple-clusters.md]
+
 ### Adding accounts
 * [Adding a Microsoft Azure Cloud account](account-add-azure.md)
 
